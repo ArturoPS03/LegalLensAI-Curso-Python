@@ -11,7 +11,7 @@ Este proyecto consiste en una aplicación web que analiza contratos en PDF usand
 Primero hace falta una API key gratuita de Groq (el servicio de IA que usa el proyecto). Te la dan gratis registrándote en https://console.groq.com/keys.
 
 Al tener la API key hay que crear un archivo `.env` en la raíz del proyecto y pegarlo:
-GROQ_API_KEY=key-aqui
+GROQ_API_KEY=aqui-tu-key
 
 Luego levantar todo con:
 docker compose up --build
