@@ -50,7 +50,7 @@ TEXTO DEL CONTRATO:
 
 class ContratoAlquiler(Contrato):
     def obtener_prompt_especifico(self) -> str:
-        return """Eres un abogado experto en derecho español. Analiza este contrato de alquiler buscando:
+        return """Eres un abogado español experto en derecho. Analiza este contrato de alquiler buscando:
 - Fianza ilegal (debe ser máximo 1 mes para vivienda habitual)
 - Reparaciones estructurales cargadas al inquilino (ilegal según Art. 21 LAU)
 - Acceso del casero sin preaviso (ilegal)

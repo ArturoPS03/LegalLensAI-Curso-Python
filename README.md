@@ -1,35 +1,44 @@
 # LegalLens AI
 
-SaaS para auditoría automática de contratos mediante Inteligencia Artificial.
+Este proyecto consiste en una aplicación web que analizará contratos en PDF usando IA para detectar cláusulas abusivas o ilegales.
 
-## Requisitos
-- Docker
-- Docker Compose
+## Requisitos:
+- Docker y Docker Compose instalados.
 
-## Instalación
+## Cómo ejecutarlo:
 
-1. Clona el repositorio
-2. Crea el archivo `.env` en la raíz del proyecto:
-GROQ_API_KEY=tu-api-key-aqui
+Primero hace falta una API key gratuita de Groq (el servicio de IA que usa el proyecto). Te la dan gratis registrándote en https://console.groq.com/keys.
 
-Obtén tu API key gratuita en: https://console.groq.com/keys
+Una vez la tengas, crea un archivo `.env` en la raíz del proyecto donde pegar la key:
+GROQ_API_KEY=(KEY)
 
-3. Levanta el proyecto:
+Luego levantar todo con:
 docker compose up --build
 
-4. Abre http://localhost en el navegador
+Y abrir en: http://localhost.
 
-## Arquitectura
+## Estructura del proyecto:
 
-- **nginx-proxy** — Proxy inverso (puerto 80)
-- **backend-django** — Panel de gestión y dashboard
-- **ai-engine** — Motor de IA con FastAPI + LLaMA 3.3
-- **db-legal** — Base de datos PostgreSQL
+El proyecto usa 4 contenedores Docker:
 
-## Uso
+- **nginx** — hace de proxy, es el único que tiene el puerto 80 abierto.
+- **backend-django** — la web, el dashboard y la base de datos.
+- **ai-engine** — el microservicio FastAPI que lee los PDFs y llama a la IA.
+- **db-legal** — PostgreSQL.
 
-1. Accede a http://localhost
-2. Haz clic en "Subir contrato"
-3. Selecciona el tipo (Alquiler o NDA)
-4. Sube el PDF
-5. La IA analiza y muestra las cláusulas abusivas detectadas
+## POO - Cómo está organizado el código de análisis:
+
+Hay una clase base `Contrato` con un método abstracto obtener_prompt_especifico(). Cada tipo de contrato hereda de ella y define qué tiene que buscar la IA:
+
+- ContratoAlquiler — busca cualquier cosa ilegal.
+- ContratoNDA — busca cláusulas abusivas típicas de los NDAs.
+
+También hay una función crear_contrato() que recibe el tipo como string y devuelve el objeto correcto.
+
+## Dataset de prueba:
+
+En la carpeta `dataset/` hay 4 contratos PDF para probar:
+- alquiler_contrato_legal.pdf — contrato de alquiler correcto.
+- alquiler_contrato_trampa.pdf — contrato con cláusulas ilegales.
+- nda_contrato_legal.pdf — NDA correcto.
+- nda_contrato_trampa.pdf — NDA con cláusulas abusivas.

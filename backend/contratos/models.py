@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Contrato(models.Model):
@@ -12,6 +13,7 @@ class Contrato(models.Model):
         ('BAJO', 'Bajo'),
     ]
 
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     nombre_archivo = models.CharField(max_length=255)
     tipo = models.CharField(max_length=20, choices=TIPO_CHOICES)
     fecha_subida = models.DateTimeField(auto_now_add=True)

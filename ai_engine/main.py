@@ -12,7 +12,7 @@ def health():
 
 @app.get("/hola")
 def hola():
-    return {"mensaje": "¡Hola desde FastAPI! Los contenedores se hablan 🎉"}
+    return {"mensaje": "Hola desde FastAPI."}
 
 
 @app.post("/analizar-pdf")
