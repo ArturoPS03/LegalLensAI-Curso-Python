@@ -8,11 +8,10 @@
 <body class="bg-light">
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">⚖️ Informe de auditoría</h1>
-        <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">← Dashboard</a>
+        <h1 class="h3">Informe de auditoria</h1>
+        <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">Volver al dashboard</a>
     </div>
 
-    <!-- Cabecera -->
     <div class="card shadow-sm mb-4">
         <div class="card-body">
             <div class="row">
@@ -21,16 +20,16 @@
                     <p class="text-muted mb-1">{{ contrato.get_tipo_display }}</p>
                     <p class="mb-1"><strong>Firmantes:</strong> {{ contrato.firmantes|join:", " }}</p>
                     <p class="mb-1"><strong>Fecha:</strong> {{ contrato.fecha_contrato }}</p>
-                    <p class="mb-1"><strong>Duración:</strong> {{ contrato.duracion }}</p>
+                    <p class="mb-1"><strong>Duracion:</strong> {{ contrato.duracion }}</p>
                     <p class="mb-0"><strong>Importe:</strong> {{ contrato.importe }}</p>
                 </div>
                 <div class="col-md-4 text-end">
                     {% if contrato.riesgo_total == 'CRITICO' %}
-                        <span class="badge bg-danger fs-5 p-3">🚨 RIESGO CRÍTICO</span>
+                        <span class="badge bg-danger fs-5 p-3">RIESGO CRITICO</span>
                     {% elif contrato.riesgo_total == 'MEDIO' %}
-                        <span class="badge bg-warning text-dark fs-5 p-3">⚠️ RIESGO MEDIO</span>
+                        <span class="badge bg-warning text-dark fs-5 p-3">RIESGO MEDIO</span>
                     {% else %}
-                        <span class="badge bg-success fs-5 p-3">✅ RIESGO BAJO</span>
+                        <span class="badge bg-success fs-5 p-3">RIESGO BAJO</span>
                     {% endif %}
                     <p class="mt-2 text-muted">{{ contrato.num_banderas }} banderas rojas</p>
                 </div>
@@ -38,31 +37,29 @@
         </div>
     </div>
 
-    <!-- Resumen -->
     <div class="alert alert-secondary mb-4">
         <strong>Resumen:</strong> {{ contrato.resumen }}
     </div>
 
-    <!-- Banderas rojas -->
     {% if contrato.banderas_rojas %}
-    <h4 class="mb-3">🚩 Cláusulas problemáticas</h4>
+    <h4 class="mb-3">Clausulas problematicas</h4>
     {% for bandera in contrato.banderas_rojas %}
     <div class="card border-danger mb-3 shadow-sm">
         <div class="card-header bg-danger text-white d-flex justify-content-between">
-            <span>⚠️ Cláusula abusiva detectada</span>
+            <span>Clausula abusiva detectada</span>
             <span class="badge bg-light text-danger">{{ bandera.gravedad }}</span>
         </div>
         <div class="card-body">
             <blockquote class="blockquote mb-2">
                 <p class="fst-italic text-muted" style="font-size:0.9rem">« {{ bandera.clausula }} »</p>
             </blockquote>
-            <p class="mb-0 text-danger"><strong>⚖️ Problema legal:</strong> {{ bandera.problema }}</p>
+            <p class="mb-0 text-danger"><strong>Problema legal:</strong> {{ bandera.problema }}</p>
         </div>
     </div>
     {% endfor %}
     {% else %}
     <div class="alert alert-success">
-        ✅ No se detectaron cláusulas abusivas en este contrato.
+        No se detectaron clausulas abusivas en este contrato.
     </div>
     {% endif %}
 </div>

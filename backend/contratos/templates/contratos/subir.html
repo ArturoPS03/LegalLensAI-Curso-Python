@@ -7,7 +7,7 @@
 </head>
 <body class="bg-light">
 <div class="container py-4" style="max-width: 600px">
-    <h1 class="h3 mb-4">⚖️ Subir contrato</h1>
+    <h1 class="h3 mb-4">Subir contrato</h1>
     <div class="card shadow-sm">
         <div class="card-body">
             <form method="post" enctype="multipart/form-data">
@@ -24,18 +24,16 @@
                     <input type="file" name="archivo" class="form-control" accept=".pdf" required>
                 </div>
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-primary btn-lg">
-                        🔍 Analizar contrato
-                    </button>
+                    <button type="submit" class="btn btn-primary btn-lg">Analizar contrato</button>
                 </div>
             </form>
         </div>
     </div>
-    <a href="{% url 'dashboard' %}" class="btn btn-link mt-3">← Volver al dashboard</a>
+    <a href="{% url 'dashboard' %}" class="btn btn-link mt-3">Volver al dashboard</a>
 </div>
 <script>
 document.querySelector("form").addEventListener("submit", function() {
-    document.querySelector("button[type=submit]").innerHTML = "⏳ Analizando con IA...";
+    document.querySelector("button[type=submit]").innerHTML = "Analizando...";
     document.querySelector("button[type=submit]").disabled = true;
 });
 </script>

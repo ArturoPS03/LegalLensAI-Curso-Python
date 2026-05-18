@@ -14,8 +14,9 @@ services:
   backend-django:
     build: ./backend
     command: >
-      sh -c "python manage.py migrate &&
-             python manage.py runserver 0.0.0.0:8080"
+      sh -c "while ! nc -z db-legal 5432; do echo 'Esperando PostgreSQL...'; sleep 1; done &&
+                  python manage.py migrate &&
+                  python manage.py runserver 0.0.0.0:8080"
     volumes:
       - ./backend:/app:z
     environment:
